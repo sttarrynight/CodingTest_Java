@@ -23,8 +23,10 @@ public class Main {
 			}
 		}
 		
-		list.sort((x,y)->x.compareTo(y));
-		list.sort((x,y)->x.length()-y.length());
+		list.sort((x,y)->{
+            if(x.length() != y.length()) return x.length()-y.length();
+            else return x.compareTo(y);
+        });
 		
 		for(String s : list) {
 			sb.append(s).append("\n");
