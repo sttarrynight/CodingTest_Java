@@ -14,7 +14,6 @@ public class Main {
 		path[0] = Integer.MAX_VALUE;
 		
 		for(int i=2; i<=N; i++) {
-			int shortest = 0;
 			int r1 = 0;
 			int r2 = 0;
 			int r3 = 0;
@@ -29,9 +28,7 @@ public class Main {
 			
 			r3 = i-1;
 			
-			shortest = Math.min(path[r1], path[r2]);
-			
-			path[i] = Math.min(shortest, path[r3]) + 1;
+			path[i] = Math.min(Math.min(path[r1], path[r2]), path[r3]) + 1;
 		}
 		
 		System.out.println(path[N]);
