@@ -13,18 +13,15 @@ public class Main {
 		
 		int cnt = 0;
 		
-		int startIdx = 0;
-		int endIdx = search.length()-1;
+		int idx = 0;
 		
-		while(endIdx < docs.length()) {
-			String subDocs = docs.substring(startIdx, endIdx+1);
+		while(idx+search.length()-1 < docs.length()) {
+			String subDocs = docs.substring(idx, idx+search.length());
 			if(subDocs.equals(search)) {
-				startIdx += search.length();
-				endIdx += search.length();
+				idx += search.length();
 				cnt ++;
 			} else {
-				startIdx++;
-				endIdx++;
+				idx++;
 			}
 		}
 		
