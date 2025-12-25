@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -15,7 +13,7 @@ public class Main {
 		
 		StringTokenizer st;
 		
-		Set<Integer> set = new HashSet<>();
+		int[] arr = new int[21];
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -23,29 +21,24 @@ public class Main {
 			st = new StringTokenizer(br.readLine());
 			switch(st.nextToken()) {
 				case "add" -> {
-					set.add(Integer.parseInt(st.nextToken()));
+					arr[Integer.parseInt(st.nextToken())] = 1;
 				}
 				case "remove" -> {
-					int x = Integer.parseInt(st.nextToken());
-					if(set.contains(x)) set.remove(x);
+					arr[Integer.parseInt(st.nextToken())] = 0;
 				}
 				case "check" -> {
 					int x = Integer.parseInt(st.nextToken());
-					sb.append(set.contains(x) ? 1 : 0).append("\n");
+					sb.append(arr[x]==1 ? 1 : 0).append("\n");
 				}
 				case "toggle" -> {
 					int x = Integer.parseInt(st.nextToken());
-					if(set.contains(x)) {
-						set.remove(x);
-					} else {
-						set.add(x);
-					}
+					arr[x] = arr[x]==1 ? 0: 1;
 				}
 				case "all" -> {
-					for(int i=1;i<=20;i++) set.add(i);
+					for(int i=1;i<=20;i++) arr[i] = 1;
 				}
 				case "empty" -> {
-					set.clear();
+					arr = new int[21];
 				}
 			}
 		}
