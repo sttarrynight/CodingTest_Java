@@ -1,13 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class Main {
 	
@@ -18,50 +11,54 @@ public class Main {
 		
 		int N = Integer.parseInt(br.readLine());
 		
-		int[] arr = new int[N];
-		Map<Integer,Integer> map = new HashMap<>();
+		int[] arr = new int[8001];
+		
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
+		double sum = 0;
 		
 		for(int i=0; i<N; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
-			if(map.containsKey(arr[i])) {
-				map.replace(arr[i], map.get(arr[i]) + 1);
-			} else {
-				map.put(arr[i], 1);
+			int x = Integer.parseInt(br.readLine());
+			arr[4000+x]++;
+			
+			if(x>max) max = x;
+			if(x<min) min = x;
+			
+			sum += x;
+		}
+		sb.append((int)Math.round(sum/N)).append("\n");
+		
+		int mid = N/2+1;
+		for(int i=0; i<arr.length; i++) {
+			mid -= arr[i];
+			if(mid<=0) {
+				sb.append(i-4000).append("\n");
+				break;
 			}
 		}
 		
-		double sum = 0;
-		for(int i : arr) {
-			sum += i;
-		}
-		int avg = (int) Math.round(sum/N);
-		sb.append(avg).append("\n");
-		
-		Arrays.sort(arr);
-		int mid = arr[(N-1)/2];
-		sb.append(mid).append("\n");
-		
-		List<Entry<Integer,Integer>> list = new ArrayList<>();
-		for(Entry<Integer,Integer> entry : map.entrySet()) {
-			list.add(entry);
-		}
-		Collections.sort(list,(e1,e2)->{
-			if(e1.getValue()==e2.getValue()) {
-				return e1.getKey() - e2.getKey();
-			} else {
-				return e2.getValue() - e1.getValue();
+		int lot = 0;
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i]>lot) {
+				lot = arr[i];
 			}
-		});
-		if(list.size()==1) {
-			sb.append(list.get(0).getKey()).append("\n");
-		}else if(list.size()>1 && !list.get(0).getValue().equals(list.get(1).getValue())) {
-			sb.append(list.get(0).getKey()).append("\n");
-		}else if(list.size()>1 && list.get(0).getValue().equals(list.get(1).getValue())) {
-			sb.append(list.get(1).getKey()).append("\n");
 		}
+		boolean isSecond = false;
+		int mode = 0;
+		for(int i=0; i<arr.length; i++) {
+			if(arr[i]==lot) {
+				if(isSecond) {
+					mode = i-4000;
+					lot = -1;
+				} else {
+					mode = i-4000;
+					isSecond = true;
+				}
+			}
+		}
+		sb.append(mode).append("\n");
 		
-		int range = arr[N-1] - arr[0];
-		sb.append(range).append("\n");
+		sb.append(max-min).append("\n");
 		
 		System.out.println(sb);
 	}
