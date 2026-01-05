@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -57,23 +55,17 @@ public class Main {
 	}
 
 	private static void search(int i, int j) {
-		Deque<int[]> queue = new ArrayDeque<>();
-		
-		queue.add(new int[] {i,j});
 		visited[i][j] = true;
 		
-		while(!queue.isEmpty()) {
-			int cur[] = queue.poll();
-			for(int x=0; x<4; x++) {
-				int ni = cur[0] + di[x];
-				int nj = cur[1] + dj[x];
-				
-				if(ni<0 || ni>N-1 || nj<0 || nj>M-1) continue;
-				
-				if(bch[ni][nj]==1 && !visited[ni][nj]) {
-					visited[ni][nj] = true;
-					queue.add(new int[] {ni,nj});
-				}
+		for(int x=0; x<4; x++) {
+			int ni = i + di[x];
+			int nj = j + dj[x];
+			
+			if(ni<0 || ni>N-1 || nj<0 || nj>M-1) continue;
+			
+			if(bch[ni][nj]==1 && !visited[ni][nj]) {
+				visited[ni][nj] = true;
+				search(ni,nj);
 			}
 		}
 	}
