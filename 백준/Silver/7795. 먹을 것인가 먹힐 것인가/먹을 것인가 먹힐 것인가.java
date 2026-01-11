@@ -13,8 +13,8 @@ public class Main {
 		
 		int T = Integer.parseInt(br.readLine());
 		
-		Integer[] A;
-		Integer[] B;
+		int[] A;
+		int[] B;
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -23,14 +23,13 @@ public class Main {
 			int N = Integer.parseInt(st.nextToken());
 			int M = Integer.parseInt(st.nextToken());
 			
-			A = new Integer[N];
+			A = new int[N];
 			st = new StringTokenizer(br.readLine());
 			for(int i=0; i<N; i++) {
 				A[i] = Integer.parseInt(st.nextToken());
 			}
-			Arrays.sort(A, (x,y)->y-x);
 			
-			B = new Integer[M];
+			B = new int[M];
 			st = new StringTokenizer(br.readLine());
 			for(int i=0; i<M; i++) {
 				B[i] = Integer.parseInt(st.nextToken());
