@@ -19,7 +19,7 @@ public class Main {
 		while(N-->0) {
 			String str = br.readLine();
 			if(str.equals("ENTER")){
-				set = new HashSet<>();
+				set.clear();
 			} else {
 				if(set.contains(str)) continue;
 				set.add(str);
