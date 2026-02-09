@@ -56,13 +56,12 @@ public class Main {
 		int start = Integer.parseInt(st.nextToken());
 		int end = Integer.parseInt(st.nextToken());
 		
-		dijkstra(start);
+		dijkstra(start, end);
 		
 		System.out.println(distance[end]);
 	}
 
-	private static void dijkstra(int start) {
-		boolean[] visited = new boolean[N+1];
+	private static void dijkstra(int start, int end) {
 		
 		Arrays.fill(distance, INF);
 		distance[start] = 0;
@@ -71,20 +70,18 @@ public class Main {
 		queue.offer(new Bus(start,0));
 		
 		while(!queue.isEmpty()) {
-			Bus bus = queue.poll();
-			int stop = bus.stop;
+			Bus current = queue.poll();
+			int currentStop = current.stop;
+			int currentPay = current.pay;
 			
-			if(!visited[stop]) {
-				visited[stop] = true;
-				
-				for( Bus b : adj[stop]) {
-					int s = b.stop;
-					int p = b.pay;
-					
-					if(!visited[s] && distance[stop] + p < distance[s]) {
-						distance[s] = distance[stop] + p;
-						queue.add(new Bus(s,distance[s]));
-					}
+			if(distance[currentStop]<currentPay) continue;
+			
+			if(currentStop == end) break;
+			
+			for(Bus next : adj[currentStop]) {
+				if(distance[currentStop] + next.pay < distance[next.stop]) {
+					distance[next.stop] = distance[currentStop] + next.pay;
+					queue.add(new Bus(next.stop, distance[next.stop]));
 				}
 			}
 		}
