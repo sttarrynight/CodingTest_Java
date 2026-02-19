@@ -11,22 +11,28 @@ public class Main {
 		
 		Map<String,Integer> bookCnt = new TreeMap<>();
 		
+		int max = 0;
+		
 		while(N-->0) {
 			String str = br.readLine();
 			if(!bookCnt.containsKey(str)) {
 				bookCnt.put(str,1);
 			} else {
-				bookCnt.computeIfPresent(str, (k,v)->v+1);
+				bookCnt.put(str,bookCnt.get(str)+1);
+			}
+			max = Math.max(bookCnt.get(str),max);
+		}
+		
+		List<String> list = new ArrayList<>();
+		
+		for(String str : bookCnt.keySet()) {
+			if(bookCnt.get(str)==max) {
+				list.add(str);
 			}
 		}
 		
-		List<Map.Entry<String,Integer>> list = new ArrayList<>(bookCnt.entrySet());
-		list.sort((e1,e2)->{
-			if(e1.getValue()!=e2.getValue()) return e2.getValue()-e1.getValue();
-			else return e1.getKey().compareTo(e2.getKey());
-		});
-		
-		System.out.println(list.get(0).getKey());
+		Collections.sort(list);
+		System.out.println(list.get(0));
 	}
 
 }
