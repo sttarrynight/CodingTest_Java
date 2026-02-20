@@ -1,0 +1,28 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int T = Integer.parseInt(br.readLine());
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(T/300).append(" ");
+		T%=300;
+		sb.append(T/60).append(" ");
+		T%=60;
+		sb.append(T/10).append(" ");
+		T%=10;
+		
+		if(T==0) {
+			System.out.println(sb);
+		} else {
+			System.out.println(-1);
+		}
+	}
+
+}
