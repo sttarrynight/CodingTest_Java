@@ -38,6 +38,7 @@ public class Main {
 			for(int x : adj[cur]) {
 				if(depth[x]==0) {
 					depth[x] = depth[cur]+1;
+					if(depth[x]-1==K) continue;
 					queue.add(x);
 				}
 			}
