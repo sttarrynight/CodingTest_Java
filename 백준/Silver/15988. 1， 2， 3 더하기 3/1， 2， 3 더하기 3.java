@@ -8,22 +8,20 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int T = Integer.parseInt(br.readLine());
-		ArrayList<Long> dpList = new ArrayList<>();
-		dpList.add(0L);
-		dpList.add(1L);
-		dpList.add(2L);
-		dpList.add(4L);
 		StringBuilder sb = new StringBuilder();
+		
+		long[] dp = new long[1000001];
+		dp[1] = 1;
+		dp[2] = 2;
+		dp[3] = 4;
+		
+		for(int i=4; i<=1000000; i++) {
+			dp[i] = (dp[i-1] + dp[i-2] + dp[i-3])%1000000009;
+		}
 		
 		while(T-->0) {
 			int n = Integer.parseInt(br.readLine());
-			if(n<=3 || n<=dpList.size()-1) sb.append(dpList.get(n)).append("\n");
-			else {
-				for(int i=dpList.size(); i<=n; i++) {
-					dpList.add(((dpList.get(i-1)%1000000009) + (dpList.get(i-2)%1000000009) + (dpList.get(i-3)%1000000009))%1000000009);
-				}
-				sb.append(dpList.get(n)).append("\n");
-			}
+			sb.append(dp[n]).append("\n");
 		}
 		
 		System.out.println(sb);
