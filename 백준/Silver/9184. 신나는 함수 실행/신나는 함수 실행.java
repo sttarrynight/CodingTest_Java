@@ -37,7 +37,7 @@ public class Main {
 			int b = Integer.parseInt(st.nextToken());
 			int c = Integer.parseInt(st.nextToken());
 			if(a==-1 && b==-1 && c==-1) break;
-			sb.append("w(").append(a).append(", ").append(b).append(", ").append(c).append(") = ").append(w(a,b,c)).append("\n");
+			sb.append("w(" + a + ", " + b + ", " + c + ") = " + w(a,b,c)).append("\n");
 		}
 		System.out.println(sb);
 	}
