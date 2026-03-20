@@ -19,19 +19,23 @@ public class Main {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
+		int start = 0;
+		int end = 0;
+		int sum = arr[0];
 		int cnt = 0;
 		
-		for(int i=0; i<N; i++) {
-			int sum = 0;
-			for(int j=i; j<N; j++) {
-				sum+=arr[j];
-				if(sum==M) {
-					cnt++;
-					continue;
-				}
-				else if(sum>M) {
-					continue;
-				}
+		while(true) {
+			if(sum==M) {
+				cnt++;
+				sum -= arr[start];
+				start++;
+			} else if(sum>M) {
+				sum -= arr[start];
+				start++;
+			} else {
+				end++;
+				if(end==N) break;
+				sum += arr[end];
 			}
 		}
 		
