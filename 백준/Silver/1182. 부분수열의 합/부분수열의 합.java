@@ -6,7 +6,6 @@ public class Main {
 	static int N;
 	static int S;
 	static int[] arr;
-	static boolean[] visited;
 	static int cnt;
 
 	public static void main(String[] args) throws IOException {
@@ -27,28 +26,21 @@ public class Main {
 		}
 		
 		cnt = 0;
-		visited = new boolean[N];
+		dfs(0,0);
 		
-		for(int i=0; i<N; i++) {
-			dfs(i,0, -1);
-		}
+		if(S==0) cnt--;
 		
 		System.out.println(cnt);
 	}
 
-	private static void dfs(int depth, int sum, int idx) {
-		if(depth==N) {
+	private static void dfs(int idx, int sum) {
+		if(idx==N) {
 			if(sum==S) {
 				cnt++;
-				return;
 			}
+			return;
 		}
-		for(int i=0; i<N; i++) {
-			if(!visited[i] && idx<i) {
-				visited[i] = true;
-				dfs(depth+1,sum+arr[i],i);
-				visited[i] = false;
-			}
-		}
+		dfs(idx+1,sum+arr[idx]);
+		dfs(idx+1,sum);
 	}
 }
