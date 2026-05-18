@@ -22,11 +22,8 @@ class Solution {
     }
     
     public static void dfs(int idx, int[] arrNow, int n) {
-        if(idx==11) {
+        if(idx==10) {
             arrNow[10] = n;
-            n=0;
-        }
-        if(n==0) {
             int diff = isWin(arrNow);
             if(diff>=scoreDiff) {
                 if(diff==scoreDiff){
@@ -51,6 +48,7 @@ class Solution {
                     scoreDiff = diff;
                 }
             }
+            arrNow[10] = 0;
             return;
         }
         
