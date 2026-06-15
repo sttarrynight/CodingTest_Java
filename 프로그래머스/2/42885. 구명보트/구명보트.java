@@ -9,16 +9,11 @@ class Solution {
         int end = people.length-1;
         
         while(start<=end) {
-            if(start==end) {
-                answer++;
-                break;
-            }
-            int diff = limit - people[end];
-            if(diff >= people[start]) {
+            if(people[start] + people[end] <= limit) {
                 start++;
             }
-            answer++;
             end--;
+            answer++;
         }
         
         return answer;
