@@ -18,7 +18,7 @@ class Solution {
             stack.push(nums[i]);
         }
         
-        if(k-- > 0) {
+        while(k-- > 0) {
             stack.pop();
         }
         
